@@ -1,0 +1,55 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      # actions/checkout v4.3.0
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      # actions/setup-node v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+      - name: Install claude CLI (pinned)
+        run: npm install -g @anthropic-ai/claude-code@2.1.232
+      - name: Validate manifests (strict)
+        run: |
+          claude plugin validate . --strict
+          claude plugin validate skills/adversarial-security-review --strict
+      - name: Manifest version agreement
+        run: |
+          node -e '
+            const fs = require("fs");
+            const m = JSON.parse(fs.readFileSync(".claude-plugin/marketplace.json", "utf8"));
+            const p = JSON.parse(fs.readFileSync("skills/adversarial-security-review/.claude-plugin/plugin.json", "utf8"));
+            const entry = m.plugins.find((x) => x.name === p.name);
+            if (!entry) throw new Error("plugin missing from marketplace.json");
+            if (entry.version && entry.version !== p.version)
+              throw new Error(`version mismatch: plugin ${p.version} vs marketplace ${entry.version}`);
+            console.log("versions agree:", p.version);
+          '
+
+  # Manual only: evals spend API credits. Requires the ANTHROPIC_API_KEY
+  # repo secret. Run before any release bump.
+  evals:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      # actions/checkout v4.3.0
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      # actions/setup-node v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+      - name: Install claude CLI (pinned)
+        run: npm install -g @anthropic-ai/claude-code@2.1.232
+      - name: Run plugin evals
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: claude plugin eval skills/adversarial-security-review --max-cost-usd 5
