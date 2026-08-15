@@ -6,6 +6,14 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 
 ## adversarial-security-review
 
+### 0.7.0 (2026-08-15)
+- Novelty floor (Level 3): a reserved-budget mode for hunting below the
+  taxonomy — primitive-layer contract mining, differential pairs, spec
+  ambiguity, primitive properties (idempotence, canonical uniqueness),
+  anomaly-first fuzzing, distant-domain transplants. May honestly
+  produce nothing; novelty claims get no discount (executed, reduced,
+  or downgraded).
+
 ### 0.6.1 (2026-08-15)
 - Per-skill landing README. First tagged release
   (`adversarial-security-review--v0.6.1`).

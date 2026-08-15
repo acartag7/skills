@@ -23,6 +23,11 @@ support a "safe to use" recommendation — **and only when the security-critical
 dependencies were actually executed, not modeled.** If the real store/IdP/
 adapter couldn't be stood up, say the depth was capped by the harness, not
 the method; a Level-3 badge over modeled dependencies is overclaiming.
+Level 3 also carries the **novelty floor** — a reserved-budget mode for
+hypotheses below the known taxonomy (primitive contracts, differential
+pairs, spec ambiguity). Its absence of findings is not evidence of
+absence; its findings carry no novelty discount: executed, reduced, or
+downgraded like anything else.
 
 ## Rules of engagement (state before executing anything)
 
@@ -52,6 +57,7 @@ provider's cybersecurity program for advanced offensive work.
 | 2. Taxonomy execution | `references/phase-2-taxonomy.md` | `phase1-leads.md` written; runtime + deps installable |
 | 3. Invariant extraction | `references/phase-3-invariants.md` | Phase 1 done |
 | 4. Seam falsification | `references/phase-4-seams.md` | `phase1-leads.md` + `phase3-invariants.md` written; Docker for real stores/DBs |
+| Novelty floor | `references/novelty-floor.md` | Level 3, with/after Phase 4; reserved budget slice; may honestly produce nothing |
 | 5. Close the loop | `references/phase-5-close-the-loop.md` | always an ASK: PR (own repo) or disclosure (third-party); the preserved close-out workspace |
 | Harness patterns | `references/harness-playbook.md` | referenced by 2 and 4 |
 | Report format | `references/report-template.md` | final output |
