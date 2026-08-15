@@ -8,7 +8,7 @@ under `skills/` and is an independently installable plugin, listed in
 
 | Plugin | What it does |
 |---|---|
-| `adversarial-security-review` | Break-the-product security assessment. Executed PoC evidence, not opinions — three depth levels from static claims review to invariant-first falsification. |
+| [`adversarial-security-review`](skills/adversarial-security-review/README.md) | Break-the-product security assessment. Executed PoC evidence, not opinions — three depth levels from static claims review to invariant-first falsification. |
 
 ## Install (this machine)
 
