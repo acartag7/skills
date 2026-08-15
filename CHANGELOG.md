@@ -6,6 +6,11 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 
 ## adversarial-security-review
 
+### 0.7.2 (2026-08-15)
+- Plain-English explainer on the skill README: what "corpus" means, the
+  three kinds of bugs, and why the novelty floor works (experiments and
+  surprises, not creativity). Plain-terms box added to the floor itself.
+
 ### 0.7.1 (2026-08-15)
 - Novelty floor reframed around generation-vs-selection: the corpus pins
   ingredients, not recipes; testing decides what may be claimed, never

@@ -15,6 +15,30 @@ reports a false "held."
 attack-taxonomy PoCs → invariant-first falsification under concurrency and
 partial failure, where the bugs have no CVE name yet.
 
+## Can this actually find new bugs? (plain English)
+
+An AI model learns from a huge pile of everything ever written — that pile
+is its "corpus." So its first suggestions are always bugs it has read
+about before. Bugs come in three kinds:
+
+1. **Known bug types in unchecked places** — a lock that exists but was
+   only installed on 2 of the 5 doors. Scanners can't find these (they
+   match words, not missing locks). This skill finds them reliably.
+2. **Bugs unique to this system** — born from how your specific program
+   assembles its parts. The skill finds these sometimes; they are its
+   best trick.
+3. **A genuinely new type of bug** — never published anywhere.
+
+For #3, the skill doesn't ask the model to be creative (that falls back
+to old knowledge). It asks it to run experiments and notice surprises:
+read the actual library code your program uses, send the same tricky
+input to two parts of the system and check whether they disagree, poke
+the program until something weird happens — then investigate the
+weirdness. The surprise comes from your running program, not from the
+model's memory: **the world invents; the model reduces.** And the "no
+finding without a working proof" rule is the filter that keeps
+rare-but-real separate from confident nonsense.
+
 ## Install
 
 ```

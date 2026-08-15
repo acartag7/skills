@@ -21,6 +21,13 @@ depth, not failure. Every mechanism here feeds the invariant engine
 (Phase 3), it does not bypass it: the composition hypothesis is still
 "assumed here, established nowhere."
 
+In plain terms: a model only knows what it has read, so its first ideas
+are always old bug types. New bugs are new combinations of old pieces —
+and this exact program was never in anything the model read. So this
+mode's job is not creativity; it is experiments that produce surprises
+(two parts disagreeing, weird outputs) and then explaining them. The
+running program invents; the model explains.
+
 ## 1. Read the primitive, not the app
 
 Enumerate the layers under the target's own code: the URL parser, the
