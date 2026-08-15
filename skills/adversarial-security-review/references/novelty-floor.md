@@ -1,14 +1,25 @@
 # Novelty floor — hunting below the taxonomy (Level 3)
 
-The model's first hypotheses are always corpus-shaped (known mechanisms,
-new locations). Novel classes come from grounding it in evidence its
-priors don't contain. This mode manufactures that grounding. It runs at
-Level 3 alongside/after Phase 4, with its own reserved budget slice, and
-it is ALLOWED to produce nothing — that is honest depth, not failure.
+Generation and selection are different jobs, and only one of them is
+bounded by the corpus. A bug class is never a new primitive — it is a new
+COMPOSITION (this primitive + that assumption + this sequence), and the
+corpus contains scattered findings, not the combination space: it pins
+the ingredients, not the recipes. So the model does not have to invent
+from nothing. It has to NOTICE.
 
-Every mechanism here feeds the invariant engine (Phase 3), it does not
-bypass it: the composition hypothesis is still "assumed here, established
-nowhere."
+The operating principle: **the world invents; the model reduces.** Route
+hypothesis formation through ground the priors don't contain — the
+dependency's actual source at this pinned version, a live differ where
+the system under test generates the observation, fuzz anomalies from the
+world — then explain and reduce what disagrees. Testing never constrains
+generation; it decides what may be CLAIMED. The model was tested against
+the map; the bug lives in the territory.
+
+This mode runs at Level 3 alongside/after Phase 4, with its own reserved
+budget slice, and it is ALLOWED to produce nothing — that is honest
+depth, not failure. Every mechanism here feeds the invariant engine
+(Phase 3), it does not bypass it: the composition hypothesis is still
+"assumed here, established nowhere."
 
 ## 1. Read the primitive, not the app
 

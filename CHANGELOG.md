@@ -6,6 +6,12 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 
 ## adversarial-security-review
 
+### 0.7.1 (2026-08-15)
+- Novelty floor reframed around generation-vs-selection: the corpus pins
+  ingredients, not recipes; testing decides what may be claimed, never
+  what may be generated. Operating principle: the world invents, the
+  model reduces.
+
 ### 0.7.0 (2026-08-15)
 - Novelty floor (Level 3): a reserved-budget mode for hunting below the
   taxonomy — primitive-layer contract mining, differential pairs, spec
