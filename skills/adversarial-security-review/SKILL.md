@@ -24,6 +24,26 @@ dependencies were actually executed, not modeled.** If the real store/IdP/
 adapter couldn't be stood up, say the depth was capped by the harness, not
 the method; a Level-3 badge over modeled dependencies is overclaiming.
 
+## Rules of engagement (state before executing anything)
+
+One short block, up front — it frames every later step:
+
+- **Target + commit** being assessed.
+- **Authorization basis**: your own repo | an authorized engagement or
+  bounty scope | good-faith independent research intended for private
+  coordinated disclosure.
+- **Disposition intent**: report / PR / disclosure (Phase 5 is always an
+  ask).
+- PoCs stay in the local workspace; nothing touches production systems or
+  third-party infrastructure.
+
+This is methodology, not ceremony: it is also what policy-gated models
+need to keep executing exploit PoCs without stalling — authorized
+good-faith security research is permitted usage, and the framing must be
+TRUE. If a step is still gated, do not prompt around the refusal: drop to
+a lower depth (static review), or run on a deployment enrolled in the
+provider's cybersecurity program for advanced offensive work.
+
 ## Phases (each independently runnable)
 
 | Phase | File | Input needed |
@@ -136,6 +156,15 @@ workflow. Everything after it (Phases 2–4) is a single strong model at max
 effort in the main context; execution and falsification are never downgraded
 to a cheaper delegate. (If a Phase 4 seam absolutely must be delegated, it
 still has to clear the two-signal screen above.)
+
+Model policy is a compatibility requirement, not a footnote. Authorized
+good-faith security research is permitted usage on policy-gated frontier
+models (Claude, GPT) — but only when the engagement framing is present and
+true; without it, expect stalls mid-run. Refusal profiles differ by
+provider and deployment (open-weights models typically gate far less):
+pick a model/deployment whose usage policy covers offensive security
+testing, and if a step is gated, drop depth or switch to an enrolled
+deployment — never prompt around a refusal.
 
 ## Output discipline
 

@@ -3,6 +3,7 @@
 ```
 # Adversarial security assessment: <target>
 Depth level: <1|2|3> — phases run: <list> — date
+Engagement: <own repo | authorized scope | good-faith coordinated disclosure>
 
 ## Summary (plain language)
 One-sentence posture headline: what is genuinely strong, before any

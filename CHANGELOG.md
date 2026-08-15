@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 (2026-08-15)
+- Rules of engagement: target, authorization basis, and disposition
+  stated before executing anything — methodology, and also what
+  policy-gated models need to keep running authorized exploit work.
+- Model-policy guidance in the operator note: pick a deployment whose
+  usage policy covers offensive security testing; if a step is gated,
+  drop depth or switch deployments — never prompt around a refusal.
+- Report header carries the engagement basis.
+
 ## 0.5.0 (2026-08-14)
 - Report template: plain-language summary moved INSIDE the template block;
   disposition asks close the Recommendation section; disclosure hygiene
