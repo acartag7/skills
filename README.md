@@ -30,16 +30,21 @@ claude plugin update adversarial-security-review
 
 A session restart applies installed/updated plugins.
 
-## Releasing
+## Releasing (per skill, independently versioned)
 
 1. Run the eval suite if plugin evals are enabled for your CLI
-   (`claude plugin eval skills/adversarial-security-review` — currently
-   early access, gated; cases live in `skills/<name>/evals/`).
-2. Bump `version` in the plugin manifest AND the marketplace entry.
-3. Update `CHANGELOG.md` — hand-written notes, user-facing changes first.
+   (`claude plugin eval skills/<name>` — currently early access, gated;
+   cases live in `skills/<name>/evals/`).
+2. Bump `version` in the skill's plugin.json AND its marketplace entry.
+3. Add the `CHANGELOG.md` entry under the skill's section — hand-written,
+   user-facing changes first.
 4. Commit, push; CI validates manifests (strict) and version agreement;
    the evals job is manual (`workflow_dispatch`) and spends API credits.
-5. Update the marketplace and plugin as above.
+5. `claude plugin tag skills/<name>` (validates manifest agreement) and
+   push the tag it names.
+6. `gh release create <skill>--v<version> --title "<skill> v<version>"`
+   with hand-written notes.
+7. Update the marketplace and plugin as above.
 
 ## Adding a skill
 
