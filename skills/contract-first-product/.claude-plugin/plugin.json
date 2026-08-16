@@ -1,0 +1,9 @@
+{
+  "name": "contract-first-product",
+  "description": "Design a new product contract-first at a fail-closed quality bar: actor-state matrix, hostile tests that construct the named case, then paste-ready implementation prompts.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Arnold Cartagena"
+  },
+  "keywords": ["contract", "product", "freeze", "acceptance-tests", "design"]
+}

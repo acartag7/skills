@@ -56,3 +56,7 @@ ship regardless.)
 
 - `adversarial-security-review` — executed-PoC security assessment; see
   its README. Design history: `docs/adr/`.
+- `contract-first-product` — contract-first design session; see
+  its README. Birth notes: `docs/adr/0004-contract-first-from-a-design-session.md`.
+- `class-closure-review` — exact-head local PR review; empty sibling
+  cell is FAIL. Birth notes: `docs/adr/0005-class-closure-review-from-hosted-rounds.md`.

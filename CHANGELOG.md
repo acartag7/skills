@@ -4,6 +4,31 @@ One section per skill. Each skill is versioned independently: per-plugin
 semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 `<skill>--v<version>`, released per tag.
 
+## class-closure-review
+
+### 0.1.0 (2026-08-16)
+- First cut: exact-head local review; empty matrix cell is FAIL;
+  leftover claims, one-call-site wraps, stored-not-rechecked
+  policy, guard-after-write, name-not-shape schema checks, and
+  library-without-starter composition roots. Output contract
+  PASS / FAIL / STOP. Freeze-a-case protocol for the next
+  hosted miss. Seven evals (six CLEAN-must-fail heads plus a
+  closed-class control). ADR 0005 records where each field
+  gap landed.
+
+## contract-first-product
+
+### 0.1.0 (2026-08-16)
+- First cut: ordinary words first; who can show up and in what
+  state; talk.md for findings (people and rooms, one at a time);
+  holes a freeze still lets through, including one rule hiding
+  another; disclosure format; paste-ready prompts. Design chat
+  does not implement.
+- Evals a pleasing answer must fail: writer hides room;
+  any-throw is not the guard; design tab does not code; talk
+  plain; omit room on every tool. ADR 0004 records where
+  each field gap landed.
+
 ## adversarial-security-review
 
 ### 0.7.2 (2026-08-15)

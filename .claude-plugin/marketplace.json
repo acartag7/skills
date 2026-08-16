@@ -10,6 +10,18 @@
       "source": "./skills/adversarial-security-review",
       "description": "Adversarial security assessment that writes and executes exploits and PoCs — the codebase gets broken, not reviewed.",
       "version": "0.7.2"
+    },
+    {
+      "name": "contract-first-product",
+      "source": "./skills/contract-first-product",
+      "description": "Design a new product contract-first at a fail-closed quality bar: actor-state matrix, hostile tests that construct the named case, then paste-ready implementation prompts.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "class-closure-review",
+      "source": "./skills/class-closure-review",
+      "description": "Exact-head local PR review that refuses PASS until a defective behavior is closed across every sibling cell, not just the named instance.",
+      "version": "0.1.0"
     }
   ]
 }

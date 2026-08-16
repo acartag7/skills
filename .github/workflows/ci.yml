@@ -22,17 +22,19 @@ jobs:
         run: |
           claude plugin validate . --strict
           claude plugin validate skills/adversarial-security-review --strict
+          claude plugin validate skills/contract-first-product --strict
+          claude plugin validate skills/class-closure-review --strict
       - name: Manifest version agreement
         run: |
           node -e '
             const fs = require("fs");
             const m = JSON.parse(fs.readFileSync(".claude-plugin/marketplace.json", "utf8"));
-            const p = JSON.parse(fs.readFileSync("skills/adversarial-security-review/.claude-plugin/plugin.json", "utf8"));
-            const entry = m.plugins.find((x) => x.name === p.name);
-            if (!entry) throw new Error("plugin missing from marketplace.json");
-            if (entry.version && entry.version !== p.version)
-              throw new Error(`version mismatch: plugin ${p.version} vs marketplace ${entry.version}`);
-            console.log("versions agree:", p.version);
+            for (const entry of m.plugins) {
+              const p = JSON.parse(fs.readFileSync("skills/" + entry.name + "/.claude-plugin/plugin.json", "utf8"));
+              if (entry.version && entry.version !== p.version)
+                throw new Error(entry.name + ": plugin " + p.version + " vs marketplace " + entry.version);
+              console.log("versions agree:", entry.name, p.version);
+            }
           '
 
   # Manual only: evals spend API credits. Requires the ANTHROPIC_API_KEY
@@ -52,4 +54,6 @@ jobs:
       - name: Run plugin evals
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: claude plugin eval skills/adversarial-security-review --max-cost-usd 5
+        run: |
+          claude plugin eval skills/adversarial-security-review --max-cost-usd 5
+          claude plugin eval skills/class-closure-review --max-cost-usd 5

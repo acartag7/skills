@@ -1,0 +1,9 @@
+{
+  "name": "class-closure-review",
+  "description": "Exact-head local PR review that refuses PASS until a defective behavior is closed across every sibling cell, not just the named instance.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Arnold Cartagena"
+  },
+  "keywords": ["review", "pr", "sibling", "claims", "exact-head"]
+}
