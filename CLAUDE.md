@@ -58,5 +58,6 @@ ship regardless.)
   its README. Design history: `docs/adr/`.
 - `contract-first-product` — contract-first design session; see
   its README. Birth notes: `docs/adr/0004-contract-first-from-a-design-session.md`.
-- `class-closure-review` — exact-head local PR review; empty sibling
-  cell is FAIL. Birth notes: `docs/adr/0005-class-closure-review-from-hosted-rounds.md`.
+- Repo-local review eval (not a plugin) — how to turn hosted PR
+  history into a project skill + frozen evals, including on other
+  repos: `docs/repo-local-review-eval.md`. ADR 0005.

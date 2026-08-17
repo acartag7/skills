@@ -10,7 +10,12 @@ under `skills/` and is an independently installable plugin, listed in
 |---|---|
 | [`adversarial-security-review`](skills/adversarial-security-review/README.md) | Break-the-product security assessment. Executed PoC evidence, not opinions — three depth levels from static claims review to invariant-first falsification. |
 | [`contract-first-product`](skills/contract-first-product/README.md) | Design-session method: actor × state matrix, hostile tests that construct the named case, paste-ready implementation prompts. The design chat does not write product code. |
-| [`class-closure-review`](skills/class-closure-review/README.md) | Exact-head local PR review. PASS requires a filled sibling matrix; empty cell = fail. Evals are frozen heads a CLEAN pass must refuse. |
+
+## Guides
+
+| Guide | What it is for |
+|---|---|
+| [`repo-local-review-eval`](docs/repo-local-review-eval.md) | Turn a repo’s hosted PR review history into a **project** skill + frozen-head evals. Repeat on other repos. Not a marketplace plugin. |
 
 ## Install (this machine)
 

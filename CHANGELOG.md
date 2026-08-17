@@ -6,6 +6,13 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 
 ## class-closure-review
 
+### withdrawn (2026-08-17)
+- Not a marketplace plugin. The matrices are one repo’s review
+  history; a portable plugin cannot name those cells without
+  lying or leaking a product. The method is
+  [repo-local-review-eval.md](docs/repo-local-review-eval.md).
+  The working skill lives in the originating repo.
+
 ### 0.1.0 (2026-08-16)
 - First cut: exact-head local review; empty matrix cell is FAIL;
   leftover claims, one-call-site wraps, stored-not-rechecked

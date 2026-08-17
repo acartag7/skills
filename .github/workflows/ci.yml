@@ -23,7 +23,6 @@ jobs:
           claude plugin validate . --strict
           claude plugin validate skills/adversarial-security-review --strict
           claude plugin validate skills/contract-first-product --strict
-          claude plugin validate skills/class-closure-review --strict
       - name: Manifest version agreement
         run: |
           node -e '
@@ -54,6 +53,4 @@ jobs:
       - name: Run plugin evals
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          claude plugin eval skills/adversarial-security-review --max-cost-usd 5
-          claude plugin eval skills/class-closure-review --max-cost-usd 5
+        run: claude plugin eval skills/adversarial-security-review --max-cost-usd 5
