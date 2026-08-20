@@ -25,6 +25,13 @@ secret; token-type confusion (every token type replayed at every other
 endpoint); tampered claims with stale signature; cross-audience/cross-issuer/
 cross-resource replay, including two configs sharing keys; expiry boundaries
 (exp==now, fractional, MAX_SAFE_INTEGER); missing required claims.
+**Signature-scope oracle** (one request, run it on every signed channel):
+replay a captured valid signed request with a MODIFIED body — the error
+delta tells you what the signature binds. `401/unauthenticated` = body
+changes break it (body-bound); `404/semantic error` ("no such object") =
+the signature still verified against your new body (signature covers
+procedure/endpoint/timestamp but NOT the body) → capture-replay with
+arbitrary bodies is live; find the capture position (see Phase 4 pattern G).
 
 **Single-use artifacts:** N-way (≥8) concurrent consume of: auth codes,
 refresh tokens, nonces/JTIs, CSRF/state tokens — per store backend. Then:

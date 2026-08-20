@@ -38,6 +38,27 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 
 ## adversarial-security-review
 
+### 0.7.3 (2026-08-20)
+- Field-tested harness-honesty upgrades (from a full depth-3 engagement whose
+  headline finding was retracted and three-way falsified): exit-code capture
+  must bind to the target command (masked-exit wrapper lie); empty-body
+  probes are failed probes; arrival-based evidence rule for reachability
+  claims (observation at the destination, positive control first);
+  dump-the-wire-before-patching (compressed framing makes byte patchers
+  silent no-ops); blind instruments retroactively convert their helds to
+  unknowns; managed-runtime lifecycle reaps non-detached instruments; guest
+  scripts as files, not template strings; stale scratch files lie.
+- Taxonomy: signature-scope oracle (one-request probe — does a captured
+  signature authorize a modified body? 401-vs-404 semantics).
+- Phase 4: pattern G — unix-socket shadowing (rename, bind, proxy both
+  directions) as the acquisition primitive for platform-channel MITM;
+  placement-fingerprint-first for multi-tenant isolation claims; explicit
+  composition allocation rule when components individually hold.
+- SKILL rule 10: challenge-retest protocol (retests are redesigns, not
+  re-runs); budget rule now includes quota pacing on API-metered targets.
+
+## adversarial-security-review
+
 ### 0.7.2 (2026-08-15)
 - Plain-English explainer on the skill README: what "corpus" means, the
   three kinds of bugs, and why the novelty floor works (experiments and

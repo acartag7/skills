@@ -113,7 +113,19 @@ If the user asks for a specific phase ("just do the race-condition PoCs",
 9. **State the budget before starting.** Per phase: a PoC count / timebox
    ceiling agreed up front; when it is spent, stop and report exactly what
    was covered and what the budget didn't reach. An unbounded
-   falsification loop is a failure mode, not thoroughness.
+   falsification loop is a failure mode, not thoroughness. Budget includes
+   QUOTA on API-metered targets (concurrency caps, async resource drain
+   after cleanup, boot races): pace one instance at a time with drain waits,
+   and treat a mid-battery rate-limit as a pause, never as a result.
+10. **A challenge is a retest, and a retest is a redesign — not a re-run.**
+   When a finding is challenged (by the user or by your own doubt): (1)
+   re-audit the HARNESS before re-auditing the target; (2) rebuild the
+   instrumentation so the original false signal is UNPRODUCIBLE (bind exit
+   codes to the command, print bodies, count instrument firings); (3) add
+   one discriminator per alternative explanation (e.g. "connected-then-reset"
+   vs "filtered-before-connect" need different observables, or evidence at
+   the destination); (4) prefer arrival-based evidence. Re-running the same
+   PoC that produced a false positive re-produces the false positive.
 
 ## Delegating to a subagent (copy-paste prompt core)
 

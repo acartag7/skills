@@ -100,12 +100,34 @@ Before reporting ANY result — positive OR negative:
    held; (b) assert every stub server (DNS/HTTP/…) answered a
    positive-control client of your own, in the same process, before the
    attack ran; (c) when injecting a dependency, run ONE call first and
-   assert the returned shape against the port contract.
-5. Re-run after fixing doubt. A 400 caused by YOUR bad Content-Length is not
+   assert the returned shape against the port contract. (d) a byte-patching
+   MITM counts as an instrument: dump and decode one full message FIRST and
+   confirm your patch pattern exists in the plaintext on the wire, then
+   count patch-firings — a patcher aimed at compressed or encrypted framing
+   silently no-ops and manufactures "held" results.
+5. **Exit-code capture binds to the target command, nothing else.** `$?`
+   read after a pipe, a wrapper suffix, or a `; next-cmd` captures the LAST
+   stage's exit, not the attack's. In wrapper functions, capture the
+   command's exit into a variable FIRST, then format output. Print bodies
+   explicitly — a probe that produced no body where one was expected is a
+   failed probe, not a blocked one; never read "0" as success off a silent
+   run.
+6. **"Traffic reached X" is proven at X, not at the client.** For any
+   reachability/exfiltration claim, the evidence is an observation at the
+   destination (canary endpoint, listener log, server-side record) — never
+   the client's exit code, which cannot distinguish "connected then reset"
+   from "filtered before connect". Fire one positive-control hit to the
+   canary from an unrestricted context before trusting zero-arrivals.
+7. Re-run after fixing doubt. A 400 caused by YOUR bad Content-Length is not
    a finding — debug to ground truth. A caught false positive is evidence of
    a good assessment; record it as a disconfirmed hypothesis.
-6. If a layer can't express the attack (Fetch API has no duplicate headers),
+8. If a layer can't express the attack (Fetch API has no duplicate headers),
    simulate what the real runtime delivers and mark it.
+9. **A later-found-blind instrument retroactively invalidates its results —
+   helds included.** When you discover an instrument never fired (patcher on
+   compressed frames, tracer that died at session start), every conclusion
+   that depended on it converts from "held" to UNKNOWN, and any causal claim
+   built on those runs is retracted explicitly in the record.
 
 ## Harness-lie gallery (self-inflicted false positives, all caught by re-running)
 
@@ -138,6 +160,34 @@ Before reporting ANY result — positive OR negative:
 - Error objects don't all carry `.code` (some expose it only via `.message`).
   Capture `e?.code ?? e?.message ?? String(e)` — a bare constructor name in
   your own output hides which check actually rejected the probe.
+- A wrapper helper appending `2>/tmp/e; echo "exit=$?"` after a
+  pipe-terminated command reports the LAST PIPE STAGE's exit (or the
+  formatter's), not the attack command's — "exit=0" on a blocked request
+  read as a firewall bypass. Bind exit capture to the target command and
+  print the body before believing any status.
+- An empty response body printed as nothing and a green exit number read as
+  "data retrieved" — the request had failed and the emptiness went unnoticed.
+  No body where a body was expected = instrument failed; debug the probe,
+  not the target.
+- A byte-patching proxy on a response channel whose frames are per-envelope
+  gzip (or any compressed/encrypted framing) never matches plaintext
+  patterns — two consecutive forgery passes "held" before one hexdump
+  revealed the framing. Dump the wire before arming any patcher (checklist
+  4d).
+- Background instruments (tracers, proxies, canary servers) started inside a
+  normal command session in a managed runtime are reaped when that session
+  ends — the strace/proxy dies silently and later probes produce empty logs
+  that look like target behavior. Start long-lived instruments detached per
+  the platform's lifecycle contract, and assert the instrument is alive at
+  readout time.
+- Guest-side scripts embedded in host-language template literals are
+  corrupted by escape processing (`\x00` becomes a real NUL byte, `\r\n`
+  becomes line breaks, shell `${var:1}` breaks the host parser). Write
+  guest scripts as standalone files and read them from disk; template
+  escapes produce failures that masquerade as target errors.
+- A reused scratch file (`/tmp/body`) shows the PREVIOUS probe's content
+  after a failed fetch — stale bytes read as a response. Use per-probe
+  filenames or truncate before every run.
 
 ## Concurrency patterns
 
