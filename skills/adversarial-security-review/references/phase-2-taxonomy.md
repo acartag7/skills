@@ -98,6 +98,32 @@ content runs, or is it fetched and then executed? A registry that pulls 30
 third-party server configs with no pinning is a supply-chain RCE class,
 distinct from egress SSRF, which only covers targeting.
 
+**Lifecycle primitives and state latches.** Enumerate every DOCUMENTED
+lifecycle primitive the platform exposes to its clients (driver
+unbind/bind, freeze/thaw, suspend/resume, snapshot/restore, reset) and
+run each one against every state of the counterpart component. You are a
+spec-conformant client exercising the platform's own handshake. The
+interesting signals are rejected-teardown symptoms: counterpart WARN
+logs, status registers or state fields stuck at unrecoverable values,
+re-initialization failing permanently, or the component left holding
+resources its counterpart released. One live instance: a documented
+unbind triggers the counterpart's reset, the reset path is a stub
+returning "not supported", and the state machine latches a failure bit
+that no input sequence can clear, while the component stays live with
+pointers into memory the caller already freed. Every one of those four
+facts was observable from the least-privileged client.
+
+For any component with a state machine, also build the transition table
+from source, not docs, and compute the states with NO outgoing edges
+that the peer can drive the component into. Then drive into them. A
+latch state reachable by peer action but unreachable from repair is an
+invariant violation regardless of memory safety: it converts peer-legal
+input into permanent component death. Check the error paths first. Many
+state machines OR in a FAILED bit and never re-enter the
+valid-transition table from the resulting state. Phase 3 carries the
+invariant seeds for this class (teardown-usable state, lifetime
+coupling), and Phase 4 pattern H composes it at the seam.
+
 ## Rules
 
 - **Re-execute before you report.** Every Phase-1 lead rated 7 or higher

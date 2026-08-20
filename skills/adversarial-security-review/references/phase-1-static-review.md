@@ -64,7 +64,18 @@ Read-only.
    ship-versus-claim gap: reliability, not security. It still caps any
    "safe to use on X" verdict the report issues.
 
-7. **Sibling enumeration, mechanical and never by eye.** For every
+7. **Version-delta lead harvesting, when the deployed version is
+   pinned.** If the target runs a known version older than upstream
+   HEAD, read the changelog between them and harvest every "Fixed"
+   entry touching the target's components as a lead-list row: each is an
+   admitted bug the deployed code still carries. Read the patch, not
+   just the entry. The fix context names the exact faulty line and the
+   triggering condition. Tag each row with whether a live primitive can
+   reach the patched path. That cross-reference turns a changelog into a
+   pre-ranked test queue. Upstream did the admitting. The assessment
+   does the reaching.
+
+8. **Sibling enumeration, mechanical and never by eye.** For every
    interface with multiple implementations, enumerate them all by grepping
    the registry or factory, not your memory. Store backends, framework
    adapters, auth providers, route families, filesystem providers. A guard
@@ -78,7 +89,7 @@ Read-only.
    and one wraps it raw. A grep showing one calls the guard and the other
    doesn't is not that evidence.
 
-8. **Test-suite hygiene sweep.** Run `pytest --collect-only` or the
+9. **Test-suite hygiene sweep.** Run `pytest --collect-only` or the
    equivalent. Classify every collection error: all missing optional deps,
    or real failures hiding in the noise? Flag test files that cannot be
    valid modules, for example `test_foo().py`, where parentheses in the
@@ -107,7 +118,7 @@ exist, the phase isn't done.
 - The sibling-implementation artifact: the enumerated list of every store,
   adapter, provider, and route family, with a check mark per sibling.
 - The scanner and gate inventory (step 0), the minimum-runtime import
-  verdict (step 6), and the collection-error classification (step 8).
+  verdict (step 6), and the collection-error classification (step 9).
   These cap the final usage recommendation.
 - A first draft of the invariant list, refined in Phase 3: what does this
   code *depend on but never re-check*?

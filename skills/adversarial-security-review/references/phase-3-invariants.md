@@ -38,6 +38,19 @@ would I see if it weren't?" Seeds that generalize:
 - **Shared-secret binding.** If two deployments share a secret, what value
   actually binds a token to one deployment? Is that value collision-proof?
   What happens under split-brain state, with separate stores?
+- **Teardown returns to a usable state.** For every documented reset,
+  detach, or teardown path: does the component end in a state from which
+  re-initialization is possible? Where is that established (the reset
+  implementation) and where is it assumed (the peer's reconnect/reprobe
+  logic)? A reset path that is a stub, or that latches an error state,
+  converts a routine teardown into permanent component death.
+- **Lifetime coupling across components.** Where component A holds
+  addresses or handles into component B's memory (shared buffers, rings,
+  mmap regions, foreign IDs), which component's state machine governs the
+  release, and what covers the window between B freeing and A dropping
+  its reference? The invariant "A stops touching B's memory before B
+  frees it" is often established nowhere. It holds only by timing, and
+  teardown sequences are exactly the timing attack.
 - **Time and number edges.** Boundary equality, fractional values,
   overflow at Date and safe-integer limits. Does the accept or reject line
   move one tick?

@@ -95,47 +95,79 @@ prerequisites.
    would close it. Do not let the harness lie.
 4. **Fix the harness when it lies.** A harness bug that looks like a finding
    (wrong Content-Length, redacted strings, collapsed headers) must be
-   debugged to ground truth before reporting.
+   debugged to ground truth before reporting. A "closed" verdict from one
+   instrument is provisional. Before writing off a surface, re-test it
+   with a different mechanism and a different access width. The
+   harness-lie gallery in `references/harness-playbook.md` carries the
+   class list. Every entry there was caught live.
 5. **Sibling sweep is exhaustive grep, never an eyeball pass.** A bug in one
    adapter, store, or path is a hypothesis about ALL of them, not a
    finding. Coverage evidence is a behavioral diff: the same crafted input
    through each sibling's guard. A grep showing one calls it and another
-   doesn't is not coverage.
-6. **PoCs live outside the repo** (`/tmp/<repo>-poc/`). Never commit exploit
-   code. Never modify the target repo during assessment.
-7. **Reason from the system's invariants, not a CVE corpus.** Known-taxonomy
-   coverage does not count as a novel finding. A violated invariant with no
-   current exploit path does count: it's a latent bug.
-8. **PoCs live outside the repo, in a durable, named workspace.** Verify at
-   setup that the path persists across commands: write a probe file and read
-   it back in a second command, because sandboxes sometimes scope /tmp
-   per-call. At close-out, copy the workspace into a per-target assessment
-   vault (`<target>/<date>-level<N>/` with a manifest index). The vault
-   holds every PoC plus `phase1-leads.md` and `phase3-invariants.md`; name
-   it in the report's closing paragraph. That close-out copy is Phase 5's
+   doesn't is not coverage. **Strongest authorization evidence shape.**
+   When every sibling endpoint enforces the control and the target
+   endpoint doesn't, build the table and cite the status codes: "the
+   platform knows how to do this, and this one surface is missing it"
+   beats "bearer tokens are bad".
+6. **PoCs live outside the repo, in a durable, named workspace**
+   (`/tmp/<repo>-poc/`). Never commit exploit code. Never modify the
+   target repo during assessment. Verify at setup that the path persists
+   across commands: write a probe file and read it back in a second
+   command, because sandboxes sometimes scope /tmp per-call. At close-out,
+   copy the workspace into a per-target assessment vault
+   (`<target>/<date>-level<N>/` with a manifest index). The vault holds
+   every PoC plus `phase1-leads.md` and `phase3-invariants.md`; name it in
+   the report's closing paragraph. That close-out copy is Phase 5's
    required input. Without it, "PoCs become regression tests" is
    unrecoverable. Then ASK the user what to do with the artifacts: keep,
    promote to regression tests, attach to a disclosure, or discard. Never
    dispose of them unilaterally.
-9. **State the budget before starting.** Per phase, agree a PoC count or
+7. **Reason from the system's invariants, not a CVE corpus.** Known-taxonomy
+   coverage does not count as a novel finding. A violated invariant with no
+   current exploit path does count: it's a latent bug.
+8. **State the budget before starting.** Per phase, agree a PoC count or
    timebox ceiling up front. When it is spent, stop and report exactly what
    was covered and what the budget didn't reach. An unbounded falsification
    loop is a failure mode, not thoroughness. Budget includes QUOTA on
    API-metered targets (concurrency caps, async resource drain after
-   cleanup, boot races). Pace one instance at a time with drain waits, and
-   treat a mid-battery rate-limit as a pause, never as a result.
-10. **A challenge is a retest, and a retest is a redesign, not a re-run.**
-    When a finding is challenged, by the user or by your own doubt:
-    1. Re-audit the HARNESS before re-auditing the target.
-    2. Rebuild the instrumentation so the original false signal cannot
-       recur: bind exit codes to the command, print bodies, count
-       instrument firings.
-    3. Add one discriminator per alternative explanation. For example,
-       "connected then reset" and "filtered before connect" need different
-       observables, or evidence at the destination.
-    4. Prefer arrival-based evidence.
-    Re-running the same PoC that produced a false positive re-produces the
-    false positive.
+   cleanup, boot races, hibernation killing background processes). Pace one
+   instance at a time with drain waits, and treat a mid-battery rate-limit
+   as a pause, never as a result.
+9. **A challenge is a retest, and a retest is a redesign, not a re-run.**
+   When a finding is challenged, by the user or by your own doubt:
+   1. Re-audit the HARNESS before re-auditing the target.
+   2. Rebuild the instrumentation so the original false signal cannot
+      recur: bind exit codes to the command, print bodies, count
+      instrument firings.
+   3. Add one discriminator per alternative explanation. For example,
+      "connected then reset" and "filtered before connect" need different
+      observables, or evidence at the destination.
+   4. Prefer arrival-based evidence.
+   Re-running the same PoC that produced a false positive re-produces the
+   false positive.
+10. **"A response arrived" is not evidence of who responded.** A status
+    line plus `rejectUnauthorized: false` proves an HTTP server answered,
+    never which one. A transparent proxy or CDN may answer for the
+    destination, so check the TLS peer certificate's subject and issuer
+    before claiming "reached X". When claiming "the target object did Y",
+    verify the returned handle matches the expected object by name, ID,
+    or team. An SDK that silently creates a new object instead of
+    returning the requested one makes a same-credential test look like a
+    cross-credential test. Any "reached X" or "acted on Y" claim needs a
+    positive control that verifies identity, not just reachability.
+11. **Run the baseline-attacker test before claiming a finding.** Ask:
+    "What could this attacker already do without this bug?" If the answer
+    includes the finding's impact, the bug is not a finding. This test
+    killed more false positives in live engagements than any other single
+    check. Apply it to every severity claim, not just to the finding
+    itself.
+12. **Label authored evidence as staged, not proven.** A leak vector that
+    depends on a line of code the researcher wrote, such as a console.log
+    that prints a credential or a command that was deliberately invoked,
+    must be labeled "staged, not emitted by default". The evidence still
+    demonstrates consequence, but the report must not imply the platform's
+    own tooling produced the leak. Conflating the two is the
+    credibility-killer on triage.
 
 ## Delegating to a subagent (copy-paste prompt core)
 

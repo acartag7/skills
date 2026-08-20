@@ -38,6 +38,34 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 
 ## adversarial-security-review
 
+### 0.7.4 (2026-08-21)
+- Field lessons from a live level-3 engagement against a sandboxed
+  virtio target, each placed in the file that executes it. The
+  harness-lie gallery gains stacked instrument closes (a "closed"
+  verdict from one instrument is provisional, so vary the mechanism and
+  the access width), per-boot dmesg, unprivileged false-denieds, the
+  persistence-carrier probe, env-plumbing and SDK-arity traps, and
+  binary bytes in socket logs. The playbook gains a marker-page
+  observatory for memory-write claims, split-phase banking,
+  reaction-attribution control, and detached instrumentation on managed
+  sandboxes. The canary checklist item gains a negative control.
+- Phase 1 gains version-delta lead harvesting: when the deployed version
+  is pinned behind upstream, every "Fixed" changelog entry is an
+  admitted bug the deployed code still carries. Phase 2 gains lifecycle
+  primitives and state latches. Phase 3 gains teardown-usable and
+  lifetime-coupling invariant seeds. Phase 4 gains seam H, the
+  lifecycle interlock. The novelty floor promotes anomalies that
+  contradict your own prior negatives to top-priority leads.
+- Report template: Unproven rows split into missing-instrument vs
+  unobservable-by-construction; severity calibration covers bounty
+  tables; a new evidence-discipline section (isolated vs combined
+  counts, decodes from the target's own tables, report = script =
+  capture, identifiers must appear in the evidence).
+- SKILL rules back to principle altitude after the intake: responder
+  and handle identity, the baseline-attacker test, and staged-vs-proven
+  labeling join the rule list. The two PoC-workspace rules merged into
+  one.
+
 ### 0.7.3 (2026-08-20)
 - Harness honesty, from a depth-3 engagement whose headline finding was
   retracted and falsified three ways. Exit-code capture binds to the
@@ -66,7 +94,6 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
   headings to sentence case, one thought per sentence. No rule, step, or
   pattern changed in meaning.
 
-## adversarial-security-review
 ### 0.7.2 (2026-08-15)
 - Plain-English explainer on the skill README: what "corpus" means, the
   three kinds of bugs, and why the novelty floor works (experiments and

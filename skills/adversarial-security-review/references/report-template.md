@@ -32,7 +32,14 @@ For each:
 ## Unproven
 Hypotheses with a real mechanism that couldn't be executed. For each, say
 what was missing (no MySQL, egress not closed, needs a live tenant) and
-exactly what would close it.
+exactly what would close it. Distinguish two sub-classes with different
+weights: **missing instrument** (the harness lacked a dependency; adding
+it closes the question) and **unobservable-by-construction from this
+position** (the experiment ran repeatedly, but the effect destroys its
+own evidence faster than any output channel escapes: the target dies and
+takes the observation with it). The second is stronger. The mechanism is
+source-verified and the effect is reproduced. Only the observation is
+missing. Say which sub-class each Unproven row is.
 
 ## Held
 Attacks that failed. For each, the specific interleaving or input ruled
@@ -92,6 +99,47 @@ fixed findings are the publishable ones.
 - **Operational.** The code is right and the default or deployment
   pattern is the risk, such as opt-in limiters or unbounded
   unauthenticated writes.
+
+**Bounty tables.** When the target publishes a bounty table, claim the
+tier that matches the demonstrated impact, keyed to the specific row's
+wording. Never claim a tier whose description you cannot quote verbatim.
+Do not under-claim to dodge the inflation penalty either: the penalty
+targets inflation "without a rationale aligned with the table", and when
+the evidence supports the tier and the rationale is present, claim it.
+When acquiring the capability depends on a conceded precondition, such
+as a leak you could not demonstrate, say so in the severity paragraph
+and claim one tier net of the concession. Let the triager's surprise be
+an upgrade, not a downgrade.
+
+## Evidence and capture discipline
+
+- **Counts: isolated vs combined.** "The full sequence died N times" and
+  "the killer step was isolated M times" are different claims. Report
+  both, and never dress the combined count as the isolated one. A
+  sequence can die five times while the killer step is isolated only
+  once.
+- **Decodes from the target's own tables.** Derive every bit or flag
+  decode from the target's constant tables, source or authoritative
+  headers, never from memory. Draft specs and UAPI disagree on bit
+  positions, and a decode error can sustain a wrong narrative for
+  hours. Re-verify any correction with the same skepticism as the
+  original decode. A reviewer's counter-decode can carry its own
+  transposed nibble.
+- **Report = script = capture.** The reproduction section must match the
+  attached script's commands and the attached capture's output. If the
+  script ran a command the report omits, or the capture shows output the
+  report trims, fix the report before submitting. A triager who opens
+  the capture and finds more than the report claimed reads everything
+  after that as suspicious. Quote evidence faithfully. Neutralize in a
+  clause, never by omission.
+- **Every identifier must literally appear in the attached evidence.**
+  Harvest identifiers from the run's own capture file into the report as
+  you prove each finding. Before submission, grep every session ID, team
+  ID, project ID, sandbox name, and timestamp against the capture files.
+  Identifiers from a different run, from a teammate's handoff, or from
+  memory are the single most common way an otherwise-solid report gets
+  read as hallucinated. If evidence spans multiple runs, list both runs
+  with dates and map each claim to its run.
 
 ## The closing paragraph
 

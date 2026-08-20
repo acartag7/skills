@@ -132,10 +132,15 @@ Before reporting ANY result, positive or negative:
    as success off a silent run.
 6. **Prove "traffic reached X" at X, not at the client.** For any
    reachability or exfiltration claim, the evidence is an observation at
-   the destination: a canary endpoint, a listener log, or a server-side
-   record. A client exit code cannot distinguish "connected then reset"
-   from "filtered before connect". Fire one positive-control hit to the
-   canary from an unrestricted context before trusting zero arrivals.
+   the destination: a canary endpoint (a controlled listener or a webhook
+   capture service), a listener log, or a server-side record. A client
+   exit code cannot distinguish "connected then reset" from "filtered
+   before connect". Put a unique marker string in the payload so you can
+   grep the canary's log for it. Fire one positive-control hit from an
+   unrestricted context before trusting zero arrivals, and one
+   negative-control hit from a known-blocked path. The canary staying
+   silent there is what validates the enforcement. Only the canary's
+   log, never the client's exit code, decides whether traffic arrived.
 7. Re-run after fixing doubt. A 400 caused by YOUR bad Content-Length is
    not a finding. Debug to ground truth. A caught false positive is
    evidence of a good assessment; record it as a disconfirmed
@@ -213,7 +218,123 @@ Before reporting ANY result, positive or negative:
   errors.
 - A reused scratch file such as `/tmp/body` shows the PREVIOUS probe's
   content after a failed fetch. Stale bytes read as a response. Use
-  per-probe filenames, or truncate before every run.
+  per-probe filenames, or truncate before every run, and before citing
+  an output file as this run's evidence, verify freshness with a
+  timestamp or file-size check.
+- **Environment plumbing.** An env var set in the shell but never read by
+  the child process: a missing export, a wrong variable name, an
+  `--env-file` override, or an ambient fallback silently supplying old
+  credentials. Probe that the value the child sees is the value you set,
+  one line, before any test that depends on credentials being present.
+- **SDK arity.** An SDK create call took one options object. A second
+  argument carrying different credentials was silently ignored, and both
+  sandboxes were created under the first credential set. Check the
+  actual signature in the installed package's type definitions before
+  passing credentials through any SDK call.
+- **Binary bytes in socket logs.** A proxy that relays raw HTTP writes
+  gzip response bytes into its log, which crashes text-mode readers. In
+  Python, open socket-level logs with `open(path, "rb")` and decode each
+  line as latin1, which never throws on raw bytes, or base64-encode
+  before writing.
+- **Stacked instrument closes.** One surface read as unreachable through
+  three independent probe bugs before a fourth mechanism opened it.
+  `pread()` on `/dev/mem` returned zeros for MMIO, because the kernel
+  copy path never touches the mapping. Zeros are NOT the device's
+  answer. A register that must hold a magic value reading zero convicts
+  the instrument, not the target. A wide slice-copy (`m[:N]`, KB-range)
+  of the MMIO mapping died with SIGILL inside an IFUNC-selected libc
+  routine the masked vCPU didn't support, which presents exactly like
+  "access forbidden". A ctypes-raw mmap EINVAL'd where the language's
+  own mmap module succeeded, a marshaling bug. Every individual close
+  looked airtight. Vary the mechanism AND the access width (narrow
+  fixed-width reads are the fallback) before writing off a surface, and
+  treat any accidental success on a "closed" surface as the
+  highest-priority anomaly in the engagement.
+- **dmesg is per-boot.** A "no trap was logged" conclusion was drawn from
+  a recycled instance. The SIGILL traps had been logged all along, in
+  the boot that died. Kernel log evidence must be read in the same boot
+  as the event. When a probe process dies to a signal, grep dmesg
+  IMMEDIATELY, in the same session, before anything recycles.
+- **Unprivileged-probing false-denieds.** Each of these produced a
+  "permission denied" or silent no-op that read as target enforcement:
+  `os.path.getsize()` returns 0 for block devices (use lseek SEEK_END);
+  python has no `os.mount` (raw syscall via ctypes, and note `mount(8)`
+  checks real uid, not capabilities, so the helper refuses where the
+  syscall succeeds); buffered `open(path, "w")` on sysfs attribute files
+  raises ENOENT where `os.open(O_WRONLY)` works; `mmap.size()` EBADFs on
+  anonymous mappings; `mmap.slice` assignments demand exact length, so a
+  mis-packed struct raises an IndexError that looks like a mapping
+  failure; `Atomics.wait` behaves differently across runtimes, so verify
+  the sleep actually slept before trusting a timeout loop's "NEVER".
+  Pack structs against the wire format's own header, not from memory: a
+  20-byte pack where the format is 16 kills every downstream probe
+  silently.
+- **Verify the persistence carrier exists in YOUR namespace before
+  designing evidence around it.** A log-to-persistent-disk design failed
+  three times because the mount existed in dmesg (the kernel mounted it,
+  in the init namespace) but never appeared inside the container's
+  namespace, and first boots never mounted it at all. Probe the carrier
+  with a write-and-reread in the same context that will rely on it
+  BEFORE building the experiment on top.
+
+## Marker-page observatory (for memory-write claims)
+
+When the hypothesis is "component B writes into memory owned by A at
+attacker-influenced addresses," don't poll for abstract effects. Build a
+page observatory: mmap one page MAP_POPULATE, `mlock` it, read its GPA
+via `/proc/self/pagemap`, fill it with a sentinel byte, and poll it from
+a detached process that logs the first difference with offset and bytes.
+Point the hypothesized write at that GPA. A mutated sentinel is direct
+evidence of the write primitive. A quiet sentinel after a POSITIVE
+control (any known writer, even your own second process writing to the
+GPA via /dev/mem if the platform allows) validates the observatory.
+Keep the observatory in a DETACHED process when the trigger runs in a
+killable command session, and remember its anonymous mappings die with
+it. Anything the experiment needs ALIVE at trigger time (sprays, holders)
+must live in the SAME process as the trigger, or be re-established by it.
+
+## Split-phase banking when the sequence may kill the session
+
+If a manipulation can terminate the command stream (target crash,
+recycle, watchdog), never put the whole experiment in one command.
+Stdout dies with it, and the only evidence is an exception. Split the
+sequence so each phase is its own command. Each phase's return banks its
+output, and the phase whose return never arrives IS the attribution.
+This doubles as kill-attribution: setup-and-arm in phase 1, the
+dangerous trigger alone in phase 2, observation in phase 3. Emit
+per-phase progress lines as steps complete (stderr/console.error, not
+only a final dump) so long batteries are inspectable mid-flight and
+their partial results survive the process dying at any step.
+
+## Reaction-attribution control
+
+When the observed effect looks like the platform reacting to you (a
+reboot, a recycle, a destroy, a rate-limit), run the identical flow minus
+your manipulation as an A/B control. The reaction may be the platform's
+routine lifecycle behavior, not your doing. Then inventory every actor
+that touches the environment before attributing the reaction to the
+target, including the operator's own automation. One "platform destroys
+wedged instances within seconds" claim stood for an hour before the
+operator's own cleanup cron turned out to be the destroyer. The control
+run and the actor inventory together are what make a reaction claim
+attributable.
+
+## Detached instrumentation on managed sandboxes
+
+When the test environment kills background processes (idle hibernation,
+sandbox timeouts), long-running instrumentation such as a proxy, MITM, or
+logger must run detached inside the sandbox, not in a command the SDK
+waits on:
+
+1. Write every script (proxy, orchestrator, attack) to disk with
+   fs.writeFile, never embedded in template literals. See the gallery
+   entry on guest-side scripts.
+2. Start the orchestrator detached: `nohup script.sh &` in its own exec.
+3. Trigger the test. This is the only parent-side exec.
+4. Read results from files after the orchestrator signals completion.
+
+The parent never sends a command through a socket the proxy is
+intercepting at teardown time. That race closes the exec channel.
 
 ## Concurrency patterns
 

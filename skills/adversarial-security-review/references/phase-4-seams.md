@@ -92,6 +92,23 @@ direction, forging responses the daemon consumes, turns audit and
 metering records into attacker-controlled data. Check what the platform
 records from responses it received through a user-positionable path.
 
+**H. Lifecycle interlock between two components' state machines.** Where
+two components handshake (driver against device model, client against
+server session, agent against supervisor), run EVERY documented teardown
+primitive of one against EVERY state of the other, and read the
+counterpart's own diagnostics (kernel WARNs, service logs, status
+registers) as the oracle. The rejected-handshake symptom is the
+signature of a state machine that never modeled the teardown transition:
+the peer performs its spec-conformant teardown, the counterpart refuses
+half of it, then latches. Also enumerate the notification paths OUTSIDE
+the guarded dispatch. Fast-path mechanisms (ioeventfds, signal fds,
+webhook endpoints registered at setup) often bypass every status check
+the main interface enforces, so a component that is "dead" by the main
+interface's state may still be fully drivable through the side channel.
+Firing a side-channel notification at a component whose main state says
+inactive is a seam in itself. The hunting technique for this class is
+the Phase 2 lifecycle-primitives entry. Phase 3 carries the seeds.
+
 ## Sequence dimensions (combine freely)
 
 concurrency, partial failure, retries, replay, **restart**, replica
@@ -114,7 +131,8 @@ other silently allowed. The asymmetry is itself the finding.
   clients hide differentials.
 - If a runtime can't express the attack (the Fetch API coalesces
   duplicate headers), simulate what the real deployment layer delivers,
-  and SAY SO.
+  and SAY SO. The harness patterns behind these (real stores in Docker,
+  raw-socket clients, failure injection) are in `harness-playbook.md`.
 - Run each attack twice: once to see it, once after fixing any harness
   doubt.
 - Report the post-attack state, not just accept or reject.
