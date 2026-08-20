@@ -1,6 +1,6 @@
 {
   "name": "acartag7-skills",
-  "description": "Personal Claude Code skills — each an independently installable plugin.",
+  "description": "Personal Claude Code skills \u2014 each an independently installable plugin.",
   "owner": {
     "name": "Arnold Cartagena"
   },
@@ -8,8 +8,8 @@
     {
       "name": "adversarial-security-review",
       "source": "./skills/adversarial-security-review",
-      "description": "Adversarial security assessment that writes and executes exploits and PoCs — the codebase gets broken, not reviewed.",
-      "version": "0.7.2"
+      "description": "Adversarial security assessment that writes and executes exploits and PoCs \u2014 the codebase gets broken, not reviewed.",
+      "version": "0.7.3"
     },
     {
       "name": "contract-first-product",
