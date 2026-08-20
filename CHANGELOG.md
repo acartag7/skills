@@ -39,26 +39,34 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 ## adversarial-security-review
 
 ### 0.7.3 (2026-08-20)
-- Field-tested harness-honesty upgrades (from a full depth-3 engagement whose
-  headline finding was retracted and three-way falsified): exit-code capture
-  must bind to the target command (masked-exit wrapper lie); empty-body
-  probes are failed probes; arrival-based evidence rule for reachability
-  claims (observation at the destination, positive control first);
-  dump-the-wire-before-patching (compressed framing makes byte patchers
-  silent no-ops); blind instruments retroactively convert their helds to
-  unknowns; managed-runtime lifecycle reaps non-detached instruments; guest
-  scripts as files, not template strings; stale scratch files lie.
-- Taxonomy: signature-scope oracle (one-request probe — does a captured
-  signature authorize a modified body? 401-vs-404 semantics).
-- Phase 4: pattern G — unix-socket shadowing (rename, bind, proxy both
-  directions) as the acquisition primitive for platform-channel MITM;
-  placement-fingerprint-first for multi-tenant isolation claims; explicit
-  composition allocation rule when components individually hold.
-- SKILL rule 10: challenge-retest protocol (retests are redesigns, not
-  re-runs); budget rule now includes quota pacing on API-metered targets.
+- Harness honesty, from a depth-3 engagement whose headline finding was
+  retracted and falsified three ways. Exit-code capture binds to the
+  target command, because a wrapper suffix reports the wrong exit. A
+  probe that returns no body is a failed probe, not a blocked one.
+  Reachability claims need evidence at the destination, with a positive
+  control fired first. Dump and decode the wire before arming a byte
+  patcher, because compressed framing makes patchers silent no-ops. A
+  later-found-blind instrument converts its helds to unknowns. Managed
+  runtimes reap non-detached instruments with their command session.
+  Guest scripts go in files, not template strings. Stale scratch files
+  lie.
+- Taxonomy: the signature-scope oracle. One request tells you whether a
+  captured signature authorizes a modified body, by whether the error is
+  401 or a semantic 404.
+- Phase 4: pattern G, unix-socket shadowing. Rename the socket, bind
+  your own, proxy both directions, and you hold a MITM position on the
+  platform channel. Also placement fingerprinting before multi-tenant
+  isolation claims, and a composition allocation rule for when
+  components individually hold.
+- SKILL rule 10: the challenge-retest protocol. A retest is a redesign,
+  not a re-run. The budget rule now covers quota pacing on API-metered
+  targets.
+- Editorial pass over every skill file: em dashes become sentences,
+  semicolons become periods, prose slashes become "and" or "or",
+  headings to sentence case, one thought per sentence. No rule, step, or
+  pattern changed in meaning.
 
 ## adversarial-security-review
-
 ### 0.7.2 (2026-08-15)
 - Plain-English explainer on the skill README: what "corpus" means, the
   three kinds of bugs, and why the novelty floor works (experiments and
@@ -72,7 +80,7 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 
 ### 0.7.0 (2026-08-15)
 - Novelty floor (Level 3): a reserved-budget mode for hunting below the
-  taxonomy — primitive-layer contract mining, differential pairs, spec
+  taxonomy: primitive-layer contract mining, differential pairs, spec
   ambiguity, primitive properties (idempotence, canonical uniqueness),
   anomaly-first fuzzing, distant-domain transplants. May honestly
   produce nothing; novelty claims get no discount (executed, reduced,
@@ -84,11 +92,11 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 
 ### 0.6.0 (2026-08-15)
 - Rules of engagement: target, authorization basis, and disposition
-  stated before executing anything — methodology, and also what
+  stated before executing anything. It is methodology, and also what
   policy-gated models need to keep running authorized exploit work.
 - Model-policy guidance in the operator note: pick a deployment whose
   usage policy covers offensive security testing; if a step is gated,
-  drop depth or switch deployments — never prompt around a refusal.
+  drop depth or switch deployments. Never prompt around a refusal.
 - Report header carries the engagement basis.
 
 ### 0.5.0 (2026-08-14)
