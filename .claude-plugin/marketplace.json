@@ -9,7 +9,7 @@
       "name": "adversarial-security-review",
       "source": "./skills/adversarial-security-review",
       "description": "Adversarial security assessment that writes and executes exploits and PoCs \u2014 the codebase gets broken, not reviewed.",
-      "version": "0.7.3"
+      "version": "0.7.4"
     },
     {
       "name": "contract-first-product",

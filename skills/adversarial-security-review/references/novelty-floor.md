@@ -77,6 +77,19 @@ crash, or latency spike, as a hypothesis to EXPLAIN and REDUCE, never to
 report. Most anomalies are harness lies; see the gallery in the harness
 playbook. The reduction step is where novelty is decided.
 
+**Anomalies that contradict your own prior negatives outrank anomalies
+that contradict your expectations.** An unexpected success on a surface
+you previously closed, a probe that should have failed but succeeded, a
+"denied" operation quietly working under different parameters: each
+means one of your instruments lied, so every conclusion built on that
+instrument is now unknown, and the re-test redraws more of the map than
+any new finding would. Field instance: an attack surface was "closed" by
+three stacked probe artifacts; a throwaway step with a different access
+width succeeded accidentally, and re-testing with that width opened the
+surface the whole assessment had been built around. Chase
+result-versus-prior-book discrepancies before result-versus-hypothesis
+ones.
+
 ## 6. Distant-domain transplant
 
 The one move where the corpus prior HELPS: it is prior for another

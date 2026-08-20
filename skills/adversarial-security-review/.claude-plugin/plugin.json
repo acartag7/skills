@@ -1,7 +1,7 @@
 {
   "name": "adversarial-security-review",
   "description": "Adversarial security assessment that writes and executes real exploits and PoCs to verify or kill security hypotheses \u2014 the codebase gets broken, not reviewed. Three depth levels: static claims review, attack-taxonomy execution, invariant-first falsification.",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "author": {
     "name": "Arnold Cartagena"
   },
