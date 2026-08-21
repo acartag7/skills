@@ -1,0 +1,4 @@
+interface:
+  display_name: "Explainable Technical Writing"
+  short_description: "Make dense technical docs clear, teachable, and exact"
+  default_prompt: "Rewrite these technical documents so readers can understand the system, its impact, and the evidence behind each claim."

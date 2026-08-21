@@ -16,6 +16,12 @@
       "source": "./skills/contract-first-product",
       "description": "Design a new product contract-first at a fail-closed quality bar: actor-state matrix, hostile tests that construct the named case, then paste-ready implementation prompts.",
       "version": "0.1.0"
+    },
+    {
+      "name": "explainable-technical-writing",
+      "source": "./skills/explainable-technical-writing",
+      "description": "Turn dense technical and protocol documentation into a clear, teachable, code-backed documentation system with examples, impact warnings, diagrams, and archives.",
+      "version": "0.1.0"
     }
   ]
 }
