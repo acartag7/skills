@@ -10,6 +10,7 @@ under `skills/` and is an independently installable plugin, listed in
 |---|---|
 | [`adversarial-security-review`](skills/adversarial-security-review/README.md) | Break-the-product security assessment. Executed PoC evidence, not opinions — three depth levels from static claims review to invariant-first falsification. |
 | [`contract-first-product`](skills/contract-first-product/README.md) | Design-session method: actor × state matrix, hostile tests that construct the named case, paste-ready implementation prompts. The design chat does not write product code. |
+| [`explainable-technical-writing`](skills/explainable-technical-writing/README.md) | Refactor dense technical docs into a clear, teachable system with exact symbols, code-backed claims, examples, impact warnings, diagrams, and archives. |
 
 ## Guides
 

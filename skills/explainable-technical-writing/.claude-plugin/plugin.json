@@ -1,0 +1,9 @@
+{
+  "name": "explainable-technical-writing",
+  "description": "Turn dense technical and protocol documentation into a clear, teachable, code-backed documentation system with examples, impact warnings, diagrams, and archives.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Arnold Cartagena"
+  },
+  "keywords": ["documentation", "technical-writing", "diataxis", "explanation", "developer-docs"]
+}

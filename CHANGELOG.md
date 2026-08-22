@@ -4,6 +4,12 @@ One section per skill. Each skill is versioned independently: per-plugin
 semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 `<skill>--v<version>`, released per tag.
 
+## explainable-technical-writing
+
+### 0.1.0 (2026-08-21)
+- First release. Gives each file one Diátaxis mode, separates current reference from dated archives, requires exact public symbols and code-backed claims, and adds a teaching layer with examples, impact warnings, and diagrams.
+- Includes reusable patterns for guarded actions, proxy-trust warnings, decision flows, complete examples, stable archive forwarding pages, and the final human explainability pass.
+
 ## class-closure-review
 
 ### withdrawn (2026-08-17)
