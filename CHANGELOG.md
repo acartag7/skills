@@ -4,6 +4,53 @@ One section per skill. Each skill is versioned independently: per-plugin
 semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 `<skill>--v<version>`, released per tag.
 
+## hunt-kickoff
+
+### 0.1.0 (2026-08-25)
+- First cut, field-derived: compile entry state (board, policy dupe
+  list, newest sync notes, git log) before any work; claim probe-ID
+  blocks so concurrent lanes don't collide; emit a kickoff contract
+  (goal as a board operation, immediate queue, run rules); convert
+  vague starts into ranked candidate goals. Bootstrap path for fresh
+  engagement repos: claim ledger, verbatim policy note, receipts
+  convention (written in finally), authorization block, numbered
+  notes with collision check. Closeout: board updates, sync note
+  with instrument lessons, verdict-in-subject commit, hand off
+  before compaction. Every rule traces to an observed failure or
+  save in a six-day, 125-session agent-driven bounty engagement
+  (mined by a 19-agent extraction pass).
+
+## hunt-verdict
+
+### 0.1.0 (2026-08-25)
+- First cut, field-derived: evidence-class vocabulary
+  (PROVEN-WITH-RECEIPTS / INADEQUATELY-TESTED / NOT-RUN /
+  CLOSED-NEGATIVE / INSTRUMENT-BUG / RETRACTED); no negative without
+  its same-run positive control; decode-before-judge on captured
+  bytes; "target changed" requires the cheap falsifier first;
+  fresh-create vs genuine-restore discriminator. Write path: edit
+  ledger rows in place, re-read raw receipt bytes (auto-verdicts
+  lie), supersession tombstones in superseded files, retraction
+  propagation grep across all carriers, instrument-bug sweeps
+  converting dependent verdicts to UNKNOWN. Filing gate: receipts-
+  supported tier claimed, higher tier as argument with named
+  missing oracle, sibling-draft check, same-day PoC re-run.
+
+## hunt-consult
+
+### 0.1.0 (2026-08-25)
+- First cut, field-derived from 16+ archived rounds: round anatomy
+  (authorization preamble, primary documents never digests,
+  closed-lanes fence with receipt ids, own-holes section, one ranked
+  question, anti-theater clauses, round-2 self-re-evaluation).
+  Dissent injection (rival's verbatim disagreement pasted into the
+  next round) and verdict back-relay as the two load-bearing
+  mechanisms. Execution frozen (read-only, no subagents, single
+  response, outside the repo); serving model verified from the
+  response itself each round; prompt/answer archived as pairs;
+  receipts-win triage with VOID-and-dated-correction for failed
+  rounds; check-for-parallel-lane-files before calling fabrication.
+
 ## explainable-technical-writing
 
 ### 0.1.0 (2026-08-21)

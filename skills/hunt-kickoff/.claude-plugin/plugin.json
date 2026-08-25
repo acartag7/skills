@@ -1,0 +1,14 @@
+{
+  "name": "hunt-kickoff",
+  "description": "Session-start ritual for agent-driven security engagements: compile current state from the ledger, policy, and newest notes; claim the next probe-ID block; emit a kickoff contract before any work. Bootstraps the scaffold (board, policy note, receipts convention) in a fresh engagement repo.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Arnold Cartagena"
+  },
+  "keywords": [
+    "security",
+    "bug-bounty",
+    "engagement",
+    "workflow"
+  ]
+}
