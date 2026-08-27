@@ -72,3 +72,7 @@ When a recommendation gets tested, relay the true outcome back in the NEXT
 round's prompt ("VERDICT: none of the above; it was my harness"). This is
 what turns a consultant from an idea generator into a calibrated
 instrument — and it humbles the ones that were wrong.
+
+## Seat launchers
+
+Verified per-binary launch recipes, the gateway-env inheritance trap, and the planted-discriminator round mechanism: see `references/seats.md`.
