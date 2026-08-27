@@ -4,6 +4,22 @@ One section per skill. Each skill is versioned independently: per-plugin
 semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 `<skill>--v<version>`, released per tag.
 
+## adversarial-security-review
+
+### 0.9.0 (2026-08-27)
+- references/unmirrored-sibling.md: new reference formalizing the
+  integration-seam defect class (concern implemented once, siblings inherit
+  nothing, nobody diffs) — definition, generator function with the four
+  predictive corollaries (age asymmetry, third-class heuristic,
+  trusted-state reuse, doc-promise divergence), the concern x surface
+  matrix procedure with the mandatory verify pass, report framing that
+  feeds finding-triage, and the sibling-diff gate remediation. Forged on
+  the 2026-08 vercel/ai engagement (5 confirmed core findings + 9 verified
+  harness cells, all this class).
+- phase-1-static-review.md step 8: scale-up path from sibling enumeration
+  to the concern x surface matrix for adapter families.
+- SKILL.md: reference table row.
+
 ## hunt-consult
 
 ### 0.1.1 (2026-08-27)

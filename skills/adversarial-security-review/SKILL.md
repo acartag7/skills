@@ -66,6 +66,7 @@ cybersecurity program for advanced offensive work.
 | Harness patterns | `references/harness-playbook.md` | referenced by 2 and 4 |
 | Advisory residuals | `references/advisory-residuals.md` | during Phase 1 (lead generation) and pre-drafting (dedup pre-emption) |
 | Program intelligence | `references/program-intelligence.md` | before drafting any bounty submission: scope, exclusions, beta windows |
+| Unmirrored-sibling patterns | `references/unmirrored-sibling.md` | during Phase 1 step 8 (adapter families) and Phase 4 pattern D; the strongest filing shape |
 | Finding triage | `../finding-triage/SKILL.md` | after execution, before drafting: venue + close-risk prediction per finding |
 | Report format | `references/report-template.md` | final output |
 

@@ -89,6 +89,15 @@ Read-only.
    and one wraps it raw. A grep showing one calls the guard and the other
    doesn't is not that evidence.
 
+   When the target has MANY siblings (an adapter family, a port with 5+
+   implementations), scale this step into the **concern × surface matrix**
+   (`references/unmirrored-sibling.md`): enumerate the cross-cutting
+   concerns from the contract layer, fill enforced/missed per cell, and
+   treat every missed cell with an enforcing sibling as a lead. Predict
+   concentration where the generator function points: newest siblings,
+   tool/input classes added after the guards were written, persisted-state
+   reuse, and doc promises with single enforcement sites.
+
 9. **Test-suite hygiene sweep.** Run `pytest --collect-only` or the
    equivalent. Classify every collection error: all missing optional deps,
    or real failures hiding in the noise? Flag test files that cannot be
