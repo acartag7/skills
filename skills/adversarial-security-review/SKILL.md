@@ -64,6 +64,8 @@ cybersecurity program for advanced offensive work.
 | Novelty floor | `references/novelty-floor.md` | Level 3, with or after Phase 4; reserved budget slice; may honestly produce nothing |
 | 5. Close the loop | `references/phase-5-close-the-loop.md` | always an ask: PR on an owned repo, or disclosure on third-party code; needs the preserved close-out workspace |
 | Harness patterns | `references/harness-playbook.md` | referenced by 2 and 4 |
+| Advisory residuals | `references/advisory-residuals.md` | during Phase 1 (lead generation) and pre-drafting (dedup pre-emption) |
+| Program intelligence | `references/program-intelligence.md` | before drafting any bounty submission: scope, exclusions, beta windows |
 | Report format | `references/report-template.md` | final output |
 
 This is a continuous security-engineering loop, not a one-off pentest.
@@ -189,7 +191,11 @@ level, the phase file or files to follow, and this spine:
 > control first). The objective is not finding count. It is concrete states
 > where a security assumption stops holding.
 
-**Workflow and orchestration boundary.** Phase 1 (read-heavy fan-out whose
+**Workflow and orchestration boundary.** Fan-out hygiene, learned from a
+wedged run: cap every schema array (`maxItems`) AND the prompt counts
+("at most N leads") — max-effort agents stall emitting one uncapped
+StructuredOutput. Workflow journal completion events are `{"type":"result"}`;
+grepping for "completed" reports zero. **Workflow and orchestration boundary.** Phase 1 (read-heavy fan-out whose
 output is schema-verified and adversarially re-checked against source) is
 safe to delegate to a workflow or subagents. Phases 2 and 4 stay in the
 MAIN context. PoC execution and falsification are where harness-honesty
