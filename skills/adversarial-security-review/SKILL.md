@@ -66,6 +66,7 @@ cybersecurity program for advanced offensive work.
 | Harness patterns | `references/harness-playbook.md` | referenced by 2 and 4 |
 | Advisory residuals | `references/advisory-residuals.md` | during Phase 1 (lead generation) and pre-drafting (dedup pre-emption) |
 | Program intelligence | `references/program-intelligence.md` | before drafting any bounty submission: scope, exclusions, beta windows |
+| Finding triage | `../finding-triage/SKILL.md` | after execution, before drafting: venue + close-risk prediction per finding |
 | Report format | `references/report-template.md` | final output |
 
 This is a continuous security-engineering loop, not a one-off pentest.
