@@ -54,32 +54,59 @@ bounty/submission eligibility, max severity, and the full policy text.
    that exists nowhere primary). Advisories dual-map CWEs and dual-score
    CVSS (v3 and v4 both printed) — cite the one on the page, labeled.
 
-## The configuration trust-class check (two closures, one doctrine)
+## Pre-filing triage: the input-origin × boundary matrix
 
-Before filing anything whose untrusted input reaches the target through a
-CONSTRUCTOR OPTION or ENVIRONMENT VARIABLE, ask: **does the target itself
-treat that input as trusted configuration?** Most SDKs and clients do —
-constructor values sit in the same trust class as the baseURL, the custom
-HTTP client, default headers, and the credential itself. Two consecutive
-Informative closures on one SDK program stated the doctrine explicitly:
+Run this BEFORE drafting any bounty submission. Two closures on one
+engagement (both clean, both mechanism-undisputed, both Informative)
+reduced to two repeatable patterns — and both were PREDICTABLE from the
+matrix below, which is the point: classify before you file, not after.
 
-> "A party who can choose the resource or region value handed to the
-> client at construction time is, from the SDK's point of view, the
-> application, and could equally supply the base URL directly ... Because
-> no boundary the SDK itself defends is crossed."
+**Axis 1 — where does the malicious input originate?**
 
-The companion ruling (same program, same week): "the precondition for the
-attack already confers the claimed impact." Together: **the library
-defends its own containment and the wire — everything an integrator
-supplies at construction or via env is trusted without limit.** The
-"silent authority promotion" argument (a region knob quietly becoming a
-credential-destination knob) loses to this reading; the multi-tenant
-"tenant free text reaches the constructor" scenario is the APPLICATION's
-boundary failure in the program's model, however good the argument sounds.
-Track such findings as repo hardening issues, and reserve bounty filings
-for input that is NOT developer config — server responses, model output,
-files the target parses — crossing a boundary the target itself visibly
-defends (a validated sibling field is the proof of a defended boundary).
+- **Developer configuration** — constructor options, environment
+  variables, operator-written config files. Most libraries and SDKs treat
+  this as the application's own trust class: the party who sets it IS the
+  application, whatever the knob is named.
+- **Externally originated** — server responses, model output, user data
+  the target parses, files the target reads at documented paths. This is
+  the target's parsing/validation responsibility.
+- **Ambient environment** — PATH, umask, host state outside config.
+  Local-attacker precondition; grade accordingly.
+
+**Axis 2 — does the target visibly defend the boundary in question?**
+
+- **Defended**: a validated sibling field, a scrubbed sibling path,
+  threat-model comments, adversarial tests. (This doubles as your
+  unmirrored-fix exhibit.)
+- **Undefended**: nothing in code, tests, or docs treats this input as
+  hostile.
+
+**The matrix, and what each cell predicts:**
+
+| | Boundary defended | Boundary undefended |
+|---|---|---|
+| **Config origin** | Borderline — the defense shows partial distrust of config; file only if the gap is a stark unmirrored fix | **Repo issue.** Filing predicts an Informative ("misconfiguration") |
+| **External origin** | **File — strongest shape.** The target admits the input is hostile and missed a guard | File if impact is real; expect "working as designed" |
+
+**The two closure patterns, named — recognize them in your own drafts:**
+
+- **Capability-equivalence closure** ("the attack's precondition already
+  confers the claimed impact"). Signal you are about to hit it: your
+  impact delta over the baseline attacker is *efficiency* — fewer calls,
+  faster, one spelling instead of N — rather than a capability the
+  precondition did not already grant.
+- **Config-trust-class closure** ("the party who controls this
+  configuration is, from the target's viewpoint, the application").
+  Signal: your attacker needed to be granted constructor/env/config
+  power. The counter-argument that feels strongest and loses anyway:
+  "this knob's name hides that it selects the credential's destination."
+  Silent authority promotion is real engineering criticism and a losing
+  bounty argument — route it to a hardening issue.
+
+**The meta-rule:** findings that die on either pattern were still real
+defects with executed mechanics. The matrix does not decide whether the
+bug exists; it decides the VENUE — bounty form versus repo tracker —
+before a filing is spent on it.
 
 ## Filing-lifecycle rules (earned the hard way)
 
