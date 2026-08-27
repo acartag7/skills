@@ -4,6 +4,34 @@ One section per skill. Each skill is versioned independently: per-plugin
 semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 `<skill>--v<version>`, released per tag.
 
+## hunt-consult
+
+### 0.1.1 (2026-08-27)
+- references/seats.md: verified one-shot launchers for the local cross-agent
+  fleet (codex, grok, cursor-agent, claude, gateway claude) with the exact
+  flags each failure cost a round to find; the gateway-env inheritance trap
+  (a claude -p spawned from a gateway-routed session is the gateway model) and
+  its env-strip recipe; the planted-discriminator round mechanism; the two
+  round-2 patterns (execution-lift rerun, cite-or-concede dissent
+  adjudication).
+
+## adversarial-security-review
+
+### 0.8.0 (2026-08-27)
+- Harness-lie gallery +9 entries from a Level-3 SDK-monorepo engagement:
+  ambient home-dir node_modules substitution, identity-vs-behavior verdicts,
+  post-major-version API-drift cluster, never-ending SSE replay streams,
+  zero-TTL serve-gates masking cache bugs, failure injection landing on the
+  wrong call site, GC death-spiral starving the PoC's own instruments, two
+  zsh traps (glob-abort, interactive-wrapper stdin).
+- New release-tag verification rule: symlinked workspaces test HEAD, not the
+  shipped artifact — per-package tag diff + registry dist-tags before the
+  affected-versions line.
+- Severity calibration +3 cross-agent-verified rules: one impact axis per
+  consequence (no I:H riding a C:H theft), race-honest wording (invariant
+  core vs race branch), AC disputes resolved by spec-cite and sibling-CVE
+  precedent.
+
 ## hunt-kickoff
 
 ### 0.1.0 (2026-08-25)
