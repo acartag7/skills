@@ -54,6 +54,33 @@ bounty/submission eligibility, max severity, and the full policy text.
    that exists nowhere primary). Advisories dual-map CWEs and dual-score
    CVSS (v3 and v4 both printed) — cite the one on the page, labeled.
 
+## The configuration trust-class check (two closures, one doctrine)
+
+Before filing anything whose untrusted input reaches the target through a
+CONSTRUCTOR OPTION or ENVIRONMENT VARIABLE, ask: **does the target itself
+treat that input as trusted configuration?** Most SDKs and clients do —
+constructor values sit in the same trust class as the baseURL, the custom
+HTTP client, default headers, and the credential itself. Two consecutive
+Informative closures on one SDK program stated the doctrine explicitly:
+
+> "A party who can choose the resource or region value handed to the
+> client at construction time is, from the SDK's point of view, the
+> application, and could equally supply the base URL directly ... Because
+> no boundary the SDK itself defends is crossed."
+
+The companion ruling (same program, same week): "the precondition for the
+attack already confers the claimed impact." Together: **the library
+defends its own containment and the wire — everything an integrator
+supplies at construction or via env is trusted without limit.** The
+"silent authority promotion" argument (a region knob quietly becoming a
+credential-destination knob) loses to this reading; the multi-tenant
+"tenant free text reaches the constructor" scenario is the APPLICATION's
+boundary failure in the program's model, however good the argument sounds.
+Track such findings as repo hardening issues, and reserve bounty filings
+for input that is NOT developer config — server responses, model output,
+files the target parses — crossing a boundary the target itself visibly
+defends (a validated sibling field is the proof of a defended boundary).
+
 ## Filing-lifecycle rules (earned the hard way)
 
 - **One report first, then stagger.** Same-day, same-skeleton batches are
