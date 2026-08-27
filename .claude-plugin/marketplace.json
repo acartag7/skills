@@ -40,6 +40,18 @@
       "source": "./skills/hunt-consult",
       "description": "External-model second-opinion rounds under a field-proven contract: authorization preamble, primary documents, closed-lanes fence, dissent injection, serving-model verification, receipts-win triage.",
       "version": "0.1.1"
+    },
+    {
+      "name": "bounty-report-craft",
+      "source": "./skills/bounty-report-craft",
+      "description": "Turn an executed security finding into a filed bug-bounty report that survives adversarial triage.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "finding-triage",
+      "source": "./skills/finding-triage",
+      "description": "Pre-filing venue and close-risk triage for executed findings — before a filing is spent.",
+      "version": "0.1.0"
     }
   ]
 }

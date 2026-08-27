@@ -248,3 +248,25 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
 
 ### 0.1.0 (2026-08-14)
 - Initial import as an installable plugin (marketplace `acartag7-skills`).
+
+## bounty-report-craft
+
+### 0.1.0 (2026-08-28)
+- Initial release. Filing pipeline from executed finding to submitted
+  report: structural sentence, realistic-variant execution, surface
+  enumeration, A/B claim testing, adversarial review loop with the
+  three-family triage simulation gate, mechanical capture discipline
+  (blocks generated from captures, diffed pre-flight; PoCs ported to
+  the published artifact), triage-anchor pre-emption, guard taxonomy,
+  and venue triage. Gate zero: findings require a finding-triage
+  verdict before entering this pipeline.
+
+## finding-triage
+
+### 0.1.0 (2026-08-28)
+- Initial release. Two-axis classification (input origin x boundary
+  defense by greppable sibling evidence), matrix-to-venue decision,
+  capability-equivalence check on capability sets, named closure-pattern
+  catalog with draft-time signals, verdict-table output with a
+  calibrate-against-outcomes loop. Forged on two Informative closures
+  whose signals were visible pre-draft.

@@ -1,0 +1,7 @@
+{
+  "name": "finding-triage",
+  "description": "Pre-filing triage for executed security findings: input-origin x boundary matrix, capability-equivalence check, closure-pattern catalog — venue and close-risk prediction before a filing is spent.",
+  "version": "0.1.0",
+  "author": { "name": "Arnold Cartagena" },
+  "keywords": ["security", "triage", "bug-bounty", "venue"]
+}
