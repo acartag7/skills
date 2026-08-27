@@ -31,6 +31,17 @@ semver in its `plugin.json` (mirrored in the marketplace entry), tagged
   round-2 patterns (execution-lift rerun, cite-or-concede dissent
   adjudication).
 
+## security-playbook
+
+### 0.1.0 (2026-08-27)
+- New meta-skill: routes any security-research or bug-bounty task to the
+  right family skill (hunt-kickoff, adversarial-security-review,
+  finding-triage, bounty-report-craft, hunt-consult, hunt-verdict) and
+  enforces the pipeline gates: triage before drafting, dupe pre-flight as a
+  first-class gate, program intelligence before submission, predictions
+  logged and scored, submission slots spent as the rationed resource they
+  are.
+
 ## adversarial-security-review
 
 ### 0.8.0 (2026-08-27)

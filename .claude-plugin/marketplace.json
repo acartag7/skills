@@ -52,6 +52,12 @@
       "source": "./skills/finding-triage",
       "description": "Pre-filing venue and close-risk triage for executed findings — before a filing is spent.",
       "version": "0.1.0"
+    },
+    {
+      "name": "security-playbook",
+      "source": "./skills/security-playbook",
+      "description": "Meta-router for the security skill family — sequences the hunt/review/triage/craft pipeline and enforces its gates.",
+      "version": "0.1.0"
     }
   ]
 }
