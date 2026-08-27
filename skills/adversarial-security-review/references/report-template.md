@@ -150,3 +150,28 @@ supports it. End with the disposition asks: Phase 5, meaning a PR on
 your own repo or a private disclosure on third-party code, with
 disclosure suggested only for plainly bad or dangerous findings. Then
 ask what to do with the preserved artifacts.
+
+## Severity-calibration rules — cross-agent verified (SDK monorepo, 2026-08)
+
+Three rules that two+ independent model seats converged on, none of which the
+original report got right unaided:
+
+1. **One impact axis per consequence.** Follow-on use of a stolen credential is
+   C:H; scoring it ALSO as I:H double-counts one event. "The attacker's own
+   issued token was accepted by the attacker-configured server" is not
+   integrity impact on a third system — it is the confidentiality event
+   completing. Expect triage to re-score any I:H riding a C:H theft.
+2. **Adversarial-verification wording must be race-honest.** A behavior
+   observed once ("loop survives close()") may be the majority branch of a
+   race, not a guarantee — one seat ran it 7 times and got 5/7. Run the
+   deterministic core enough times to say which part is invariant (unbounded
+   recursion, never-settling promise: 7/7) and which is a race (post-close
+   survival: 5/7), and word the report accordingly.
+3. **CVSS AC disputes resolve by spec-cite and precedent, not intuition.**
+   "Requires the victim to have configured X" is NOT automatically AC:H:
+   CVSS v3.1 §2.3.3 removed "presence of certain system configuration
+   settings" from AC, and the User Guide has library scorers assume the
+   reasonable worst-case implementation. The decisive move is
+   precedent-shopping: find the published sibling CVE carrying the same
+   precondition qualifier and check how NVD scored it. Also: Environmental
+   considerations (rarity in the wild) do not move Base.

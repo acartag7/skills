@@ -1,0 +1,14 @@
+{
+  "name": "hunt-verdict",
+  "description": "The ledger write path for research verdicts: evidence-class naming, receipt linkage and hygiene, supersession tombstones, retraction propagation across stale carriers, and instrument-bug sweeps over dependent verdicts.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Arnold Cartagena"
+  },
+  "keywords": [
+    "security",
+    "evidence",
+    "ledger",
+    "verification"
+  ]
+}

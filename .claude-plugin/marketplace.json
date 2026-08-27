@@ -1,6 +1,6 @@
 {
   "name": "acartag7-skills",
-  "description": "Personal Claude Code skills \u2014 each an independently installable plugin.",
+  "description": "Personal Claude Code skills — each an independently installable plugin.",
   "owner": {
     "name": "Arnold Cartagena"
   },
@@ -8,8 +8,8 @@
     {
       "name": "adversarial-security-review",
       "source": "./skills/adversarial-security-review",
-      "description": "Adversarial security assessment that writes and executes exploits and PoCs \u2014 the codebase gets broken, not reviewed.",
-      "version": "0.7.4"
+      "description": "Adversarial security assessment that writes and executes exploits and PoCs — the codebase gets broken, not reviewed.",
+      "version": "0.8.0"
     },
     {
       "name": "contract-first-product",
@@ -22,6 +22,24 @@
       "source": "./skills/explainable-technical-writing",
       "description": "Turn dense technical and protocol documentation into a clear, teachable, code-backed documentation system with examples, impact warnings, diagrams, and archives.",
       "version": "0.1.0"
+    },
+    {
+      "name": "hunt-kickoff",
+      "source": "./skills/hunt-kickoff",
+      "description": "Session-start ritual for agent-driven security engagements: compile the board, claim the next probe block, emit a kickoff contract — and bootstrap the scaffold in a fresh engagement repo.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "hunt-verdict",
+      "source": "./skills/hunt-verdict",
+      "description": "The ledger write path for research verdicts: evidence classes, receipt hygiene, supersession tombstones, retraction propagation, instrument-bug sweeps.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "hunt-consult",
+      "source": "./skills/hunt-consult",
+      "description": "External-model second-opinion rounds under a field-proven contract: authorization preamble, primary documents, closed-lanes fence, dissent injection, serving-model verification, receipts-win triage.",
+      "version": "0.1.1"
     }
   ]
 }

@@ -388,3 +388,27 @@ Concrete patterns, since the wrong one wastes an hour:
   artifacts. Use ephemeral or local-only credentials, and grep for token
   shapes before any promotion or attachment.
 - Don't mutate the target repo. Don't commit PoCs. Clean up containers.
+
+## Gallery entries — SDK-monorepo engagement (2026-08, Level 3)
+
+- **Ambient `~/node_modules` substitution.** Bare `import('express')` / `'eventsource'` / `'jose'` from the PoC workspace resolved to a HOME-directory `node_modules` (user-level installs), NOT the audited lockfile — wrong dependency versions silently executing under the audit's name. Caught only by printing linked versions. Rule: symlink every named dep from the target repo's own store (`.pnpm`/equivalent) and print each link's resolved version as part of harness bring-up.
+- **Identity vs behavior verdicts.** A delegate/verifier's mechanism claim keyed on function identity (`vA === vB`) was FALSE even though the defect was real — `engine.getSchema($id)` returns a *ref-wrapped* function per call. Verdict conditions must key on observable behavior (what does slot B accept/reject), never on object identity.
+- **API-drift cluster (post-major-version targets).** Four harness lies from one v1→v2 SDK: `.tool()` became `registerTool()`; `onsessioninitialized` is captured from constructor options into a private field so post-construction assignment silently no-ops; the web-standard transport takes a `Request`, not a Node `IncomingMessage` (`toWebRequest` is the adapter); a schema under test required sibling fields (`mode`, `elicitationId`) whose absence masked the actual gap behind an unrelated ZodError. Rule: when a PoC 500s or schema-errors on an unrelated field, suspect YOUR API shape first — surface the target's real errors via `onerror`/diagnostics before debugging the target.
+- **A GET SSE replay stream never ends.** `await resp.text()` on one hangs the PoC forever. Bounded readers with a cancel-timeout (Promise.race) are the only safe read.
+- **Zero-TTL serve-gates mask cache/store bugs.** A response-cache poisoning PoC "disproved itself" until the serve-gate was understood: entries written without the server's legal freshness hint get TTL 0 (expired on write) and are never served. Know the gate before the collision: some poisoning classes need the attacker to advertise a legal TTL hint to manifest.
+- **Failure injection landing on the wrong call site.** A throwing `saveTokens` fired on the SDK's issuer *stamp-back* write, not the token-persistence write under test — the flow aborted before reaching the seam. Pre-stamp persistent state (issuer etc.) so injected failures land where the experiment aims.
+- **GC death-spiral starves the PoC's own instruments.** Under memory-exhaustion the child's own exit timers cannot fire (8s timer still pending at t=52s). Evidence must come from OUTSIDE the dying process: parent-side wall clock, external RSS sampling (`ps`), and file-banked progress lines written per phase.
+- **zsh `no matches found` kills watch-loop globs.** `ls dir/*.md` in a zsh monitor aborts the command every iteration while the glob is empty — use `find dir -maxdepth 1 -name '*.md'` in watch loops.
+- **`zsh -ic` may not deliver redirected stdin to the inner command.** Alias-resolving wrappers ate the piped prompt; the same prompt as an ARG worked. Probe arg-form with a one-token echo before launching a real seat through an interactive-shell wrapper.
+
+## Release-tag verification (affected-versions discipline)
+
+A PoC workspace symlinked into the repo's WORKING TREE tests HEAD, not the
+shipped artifact. Before writing the affected-versions line: (1) resolve the
+release tags (monorepos tag per-package — `git tag -l '*<version>'`, not
+`v<version>`); (2) `git diff <pkg-tag> HEAD -- <each finding file>` — identical
+files ship the finding, changed files need the hunk read; (3) check the
+registry dist-tags (`latest` vs `alpha`) — GA-latest raises urgency, alpha caps
+it; (4) when git tags are unavailable, stream the published tarball and grep
+for the vulnerable construct. A wrong tag name produces `bad revision` errors
+that a sloppy loop prints as IDENTICAL — sanity-print the resolved tag hash.

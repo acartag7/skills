@@ -1,0 +1,14 @@
+{
+  "name": "hunt-consult",
+  "description": "External-model second-opinion rounds under a field-proven contract: authorization preamble, primary documents only, closed-lanes fence, cite-or-abstain, dissent injection, serving-model verification, receipts-win triage, and verdict back-relay.",
+  "version": "0.1.1",
+  "author": {
+    "name": "Arnold Cartagena"
+  },
+  "keywords": [
+    "security",
+    "cross-model",
+    "second-opinion",
+    "review"
+  ]
+}
