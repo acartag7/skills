@@ -14,6 +14,9 @@ under `skills/` and is an independently installable plugin, listed in
 | [`hunt-kickoff`](skills/hunt-kickoff/README.md) | Session-start ritual for agent-driven security engagements: compile the board, claim the probe block, emit a kickoff contract. Bootstraps the scaffold in a fresh hunt repo. |
 | [`hunt-verdict`](skills/hunt-verdict/README.md) | Ledger write path for research verdicts: evidence classes, receipt hygiene, supersession tombstones, retraction propagation, instrument-bug sweeps. |
 | [`hunt-consult`](skills/hunt-consult/README.md) | External second-opinion rounds under a proven contract: primary documents, closed-lanes fence, dissent injection, serving-model verification, receipts-win triage. |
+| [`bounty-report-craft`](skills/bounty-report-craft/SKILL.md) | Turn an executed finding into a filed report that survives adversarial triage — structural framing, realistic variants, multi-model review loop, capture discipline, venue gating. |
+| [`finding-triage`](skills/finding-triage/SKILL.md) | Classify every executed finding before drafting and pick its venue (bounty / repo issue / hardening / drop): input-origin × boundary matrix, capability-equivalence check, closure-pattern catalog with logged predictions. |
+| [`security-playbook`](skills/security-playbook/SKILL.md) | Meta-router for the security family: which skill runs, in what order, and the gates between them — triage before drafting, dupe pre-flight, rationed submission slots. Start here for any security task that spans skills. |
 
 ## Guides
 
@@ -21,12 +24,40 @@ under `skills/` and is an independently installable plugin, listed in
 |---|---|
 | [`repo-local-review-eval`](docs/repo-local-review-eval.md) | Turn a repo’s hosted PR review history into a **project** skill + frozen-head evals. Repeat on other repos. Not a marketplace plugin. |
 
-## Install (this machine)
+## Install
+
+Add the marketplace once, then install whichever skills you want (each is an
+independently versioned plugin):
 
 ```
 claude plugin marketplace add acartag7/skills
 claude plugin install adversarial-security-review@acartag7-skills
+claude plugin install security-playbook@acartag7-skills
+claude plugin install finding-triage@acartag7-skills
+claude plugin install bounty-report-craft@acartag7-skills
+claude plugin install hunt-kickoff@acartag7-skills
+claude plugin install hunt-consult@acartag7-skills
+claude plugin install hunt-verdict@acartag7-skills
+claude plugin install contract-first-product@acartag7-skills
+claude plugin install explainable-technical-writing@acartag7-skills
 ```
+
+The security set in one line:
+
+```
+for p in adversarial-security-review security-playbook finding-triage bounty-report-craft hunt-kickoff hunt-consult hunt-verdict; do claude plugin install $p@acartag7-skills; done
+```
+
+### Why skill names appear doubled (`adversarial-security-review:adversarial-security-review`)
+
+Claude Code namespaces plugin skills as `<plugin>:<skill>`. Here each skill
+IS its own plugin (so you can install and version them independently), so
+the plugin name and skill name match and the listing shows both forms.
+Invoking the bare name (`/adversarial-security-review`) resolves fine;
+the doubled form is the fully-qualified one. If the doubling ever bothers
+enough to restructure, the alternative is one multi-skill plugin
+(`acartag7-skills:<skill>`) — at the cost of per-skill versioning, which
+the release flow and validator currently enforce.
 
 ## Update flow
 
