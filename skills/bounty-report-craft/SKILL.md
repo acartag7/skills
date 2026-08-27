@@ -146,6 +146,11 @@ became the frame for the two findings that crossed it).
 
 ## Venue triage (before the form exists)
 
+**Gate zero: nothing enters this skill without a finding-triage verdict.**
+Run the input-origin × boundary classification first (the
+`finding-triage` skill); config-origin and undefended-boundary findings
+are repo issues by venue and never reach this pipeline.
+
 - **Availability-only impact → the repo's issue tracker**, however clean
   the mechanics. Most programs exclude DoS outright; three independent
   reviewers converging on that reading is the signal to stop drafting.
