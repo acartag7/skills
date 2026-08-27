@@ -1,6 +1,6 @@
 {
   "name": "acartag7-skills",
-  "description": "Personal Claude Code skills \u2014 each an independently installable plugin.",
+  "description": "Personal Claude Code skills — each an independently installable plugin.",
   "owner": {
     "name": "Arnold Cartagena"
   },
@@ -8,8 +8,8 @@
     {
       "name": "adversarial-security-review",
       "source": "./skills/adversarial-security-review",
-      "description": "Adversarial security assessment that writes and executes exploits and PoCs \u2014 the codebase gets broken, not reviewed.",
-      "version": "0.7.4"
+      "description": "Adversarial security assessment that writes and executes exploits and PoCs — the codebase gets broken, not reviewed.",
+      "version": "0.8.0"
     },
     {
       "name": "contract-first-product",
@@ -39,7 +39,7 @@
       "name": "hunt-consult",
       "source": "./skills/hunt-consult",
       "description": "External-model second-opinion rounds under a field-proven contract: authorization preamble, primary documents, closed-lanes fence, dissent injection, serving-model verification, receipts-win triage.",
-      "version": "0.1.0"
+      "version": "0.1.1"
     }
   ]
 }
