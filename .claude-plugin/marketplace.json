@@ -45,19 +45,19 @@
       "name": "bounty-report-craft",
       "source": "./skills/bounty-report-craft",
       "description": "Turn an executed security finding into a filed bug-bounty report that survives adversarial triage.",
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "name": "finding-triage",
       "source": "./skills/finding-triage",
       "description": "Pre-filing venue and close-risk triage for executed findings — before a filing is spent.",
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "name": "security-playbook",
       "source": "./skills/security-playbook",
       "description": "Meta-router for the security skill family — sequences the hunt/review/triage/craft pipeline and enforces its gates.",
-      "version": "0.1.0"
+      "version": "0.1.1"
     }
   ]
 }
