@@ -1,3 +1,8 @@
+---
+name: bounty-report-craft
+description: Turn a proven security finding into a filed bug-bounty report that survives adversarial triage — structural sentence, impact framing, dedup exhibit, minimal repro, submission hygiene. Use only after finding-triage returns a FILE verdict.
+---
+
 # Bounty Report Craft
 
 Turn an executed security finding into a filed bug-bounty report that survives
