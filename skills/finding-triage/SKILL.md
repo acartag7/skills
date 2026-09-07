@@ -1,3 +1,8 @@
+---
+name: finding-triage
+description: Classify an executed security finding and decide its venue — bounty submission, repo issue, hardening note, or drop — using the input-origin x boundary matrix and the closure-pattern catalog. Use after a PoC lands and BEFORE any drafting; nothing reaches a bounty form without a triage verdict.
+---
+
 # Finding Triage
 
 Classify every executed security finding BEFORE drafting anything, and

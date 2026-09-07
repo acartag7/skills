@@ -1,3 +1,8 @@
+---
+name: security-playbook
+description: Meta-router for the security skill family: decides which security skill runs, in what order, and what gate each stage must clear before the next fires. Use FIRST whenever any security-research, adversarial-review, pentest, or bug-bounty task arrives, or when the user says "hunt", "go after <target>", "assess this repo", or asks which stage comes next.
+---
+
 # Security Playbook
 
 Meta-router for the security skill family. When any security-research,
