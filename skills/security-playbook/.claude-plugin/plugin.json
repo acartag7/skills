@@ -1,7 +1,7 @@
 {
   "name": "security-playbook",
   "description": "Meta-router for the security skill family: sequences hunt-kickoff, adversarial-security-review, finding-triage, bounty-report-craft, hunt-consult, hunt-verdict — and enforces the gates between them. Use when the user asks which security skill to use, how to start or resume a hunt, what order the pipeline runs in, or when a security task spans multiple skills.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Arnold Cartagena"
   },
